@@ -20,6 +20,24 @@
     <%= form.label :total %>
     <%= form.text_field :total %>
   </div>
+  <div class="field">
+    <%= form.label :payment_platforms %>
+    <%= form.select :id, payment_platforms_for_select, {} %>
+  </div>
+
+  <div id="payment_platforms" class="form-group">
+    <div class="links form-inline">
+      <%= link_to_add_association 'add payment platform', form, :payment_platforms %>
+    </div>
+  </div>
+  
+  <div id="payment_methods" class="form-group">
+    <div class="links form-inline">
+      <%= link_to_add_association 'add payment method', form, :payment_methods %>
+    </div>
+  </div>
+
+
 
   <div class="actions">
     <%= form.submit %>
