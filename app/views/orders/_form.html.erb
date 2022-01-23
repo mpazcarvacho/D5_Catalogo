@@ -22,20 +22,24 @@
   </div>
   <div class="field">
     <%= form.label :payment_platforms %>
-    <%= form.select :id, payment_platforms_for_select, {} %>
+    <%= form.select :name, payment_platforms_for_select, {} %>
+  </div>
+  <div class="field">
+    <%= form.label :payment_methods %>
+    <%= form.select :name, payment_methods_for_select, {} %>
   </div>
 
-  <div id="payment_platforms" class="form-group">
+  <%# <div id="payment_platforms" class="form-group">
     <div class="links form-inline">
       <%= link_to_add_association 'add payment platform', form, :payment_platforms %>
-    </div>
-  </div>
+    <%# </div>
+  </div> %>
   
-  <div id="payment_methods" class="form-group">
-    <div class="links form-inline">
-      <%= link_to_add_association 'add payment method', form, :payment_methods %>
-    </div>
-  </div>
+  <%# <div id="payment_methods" class="form-group"> %>
+    <%# <div class="links form-inline"> %>
+      <%# <%# <%= link_to_add_association 'add payment method', form, :payment_methods %> 
+    <%# </div> %>
+  <%# </div> %> 
 
 
 

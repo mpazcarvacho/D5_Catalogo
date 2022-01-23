@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_023652) do
+ActiveRecord::Schema.define(version: 2022_01_23_150414) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,11 @@ ActiveRecord::Schema.define(version: 2022_01_23_023652) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payment_methods_platforms", id: false, force: :cascade do |t|
+    t.integer "payment_platform_id", null: false
+    t.integer "payment_method_id", null: false
+  end
+
   create_table "payment_platforms", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -70,16 +75,14 @@ ActiveRecord::Schema.define(version: 2022_01_23_023652) do
 
   create_table "payments", force: :cascade do |t|
     t.integer "order_id"
-    t.integer "paymentPlatform_id"
-    t.integer "paymentMethod_id"
     t.string "state"
     t.decimal "total"
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "payment_methods_platforms_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
-    t.index ["paymentMethod_id"], name: "index_payments_on_paymentMethod_id"
-    t.index ["paymentPlatform_id"], name: "index_payments_on_paymentPlatform_id"
+    t.index ["payment_methods_platforms_id"], name: "index_payments_on_payment_methods_platforms_id"
   end
 
   create_table "physicals", force: :cascade do |t|
