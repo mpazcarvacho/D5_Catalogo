@@ -67,3 +67,6 @@ gem "image_processing", "~> 1.9"
 gem "aws-sdk-s3", "~> 1.48"
 
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+
+# 22/01/2022
+gem 'cocoon'

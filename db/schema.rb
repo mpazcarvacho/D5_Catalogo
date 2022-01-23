@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_224456) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2022_01_23_023652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,12 +33,71 @@ ActiveRecord::Schema.define(version: 2019_08_31_224456) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "digitals", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "name"
+    t.string "imageable_type"
+    t.integer "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "number"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payment_platforms", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "paymentPlatform_id"
+    t.integer "paymentMethod_id"
+    t.string "state"
+    t.decimal "total"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["paymentMethod_id"], name: "index_payments_on_paymentMethod_id"
+    t.index ["paymentPlatform_id"], name: "index_payments_on_paymentPlatform_id"
+  end
+
+  create_table "physicals", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "digital_id"
+    t.integer "physical_id"
+    t.index ["digital_id"], name: "index_products_on_digital_id"
+    t.index ["physical_id"], name: "index_products_on_physical_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -51,5 +107,4 @@ ActiveRecord::Schema.define(version: 2019_08_31_224456) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end
